@@ -1,0 +1,100 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h3>Edit Listing of Id : <%= listing._id %></h3>
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input 
+                        id="title"
+                        type="text" 
+                        placeholder="enter title" 
+                        value="<%= listing.title %>" 
+                        name="Listing[title]"
+                        class="form-control"
+                        required
+                    />
+                    <div class="invalid-feedback">Title must be required</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea
+                        name="Listing[description]" 
+                        id="description" 
+                        placeholder="description"
+                        class="form-control"
+                        required
+                    ><%= listing.description %></textarea>
+                    <div class="invalid-feedback">Please enter a short description</div>
+                </div>
+
+                <div class="mb-3">
+                    <p>Original Image</p>
+                    <img src="<%= originalImageUrl %>" alt="" id="oriImg" style="height: 20rem;">
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload New Image</label>
+                    <input 
+                        id="image"
+                        type="file" 
+                        name="Listing[image]"
+                        class="form-control"
+                    />
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-sm-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input 
+                            id="price"
+                            type="number" 
+                            placeholder="enter price" 
+                            value="<%= listing.price %>" 
+                            name="Listing[price]"
+                            class="form-control"
+                            required
+                        />
+                        <div class="invalid-feedback">Price should be valid</div>
+                    </div>
+
+                    <div class="mb-3 col-sm-8">
+                        <label for="country" class="form-label">country</label>
+                        <input 
+                            id="country"
+                            type="text" 
+                            placeholder="enter country name" 
+                            value="<%= listing.country %>" 
+                            name="Listing[country]"
+                            class="form-control"
+                            required
+                        />
+                        <div class="invalid-feedback">Country name should be valid</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input 
+                        id="location"
+                        type="text" 
+                        placeholder="enter location" 
+                        value="<%= listing.location %>" 
+                        name="Listing[location]"
+                        class="form-control"
+                        required
+                    />
+                    <div class="invalid-feedback">Location should be valid</div>
+                </div>
+                
+                <button class="mb-3 btn btn-dark add-btn">Edit</button>
+                
+            </form>
+
+            <div class="lsBox"></div>
+
+        </div>
+    </div>
+</body>

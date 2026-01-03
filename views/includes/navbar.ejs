@@ -1,0 +1,92 @@
+<style>
+  .search-btn{
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+  .search-btn:hover{
+    background-color: #fe424d;
+    color: #fff;
+  }
+  .search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+  }
+  .search-inp{
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    font-size: 0.9rem;
+  }
+  .img-msg{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 2px;
+  }
+
+  .logo_usr1 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .logo_usr1 i{
+    color: #700007;
+    font-size: 30px;
+  }
+
+  .logo_usr1 .stay, .found{
+    font-size: 21px;
+    font-weight: bold;
+    color: rgb(0, 3, 103);
+  }
+  .stay::first-letter{
+    font-size: 25px;
+    color: rgb(156, 0, 0);;
+  }
+  .found::first-letter{
+    font-size: 25px;
+    color: rgb(156, 0, 0);;
+  }
+</style>
+
+<nav class="navbar bg-dark navbar-expand-sm bg-body-tertiary sticky-top" data-bs-theme="light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><div class="logo_usr1"><i class="fa-brands fa-staylinked"></i><div class="stay">STAY</div><div class="found">FOUND</div></div></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse bg-body-tertiary" id="navbarNavAltMarkup">
+      <div class="navbar-nav" style="margin-left: 5%;">
+        <a class="nav-link" href="/listings">Explore</a>        
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <form method="GET" action="/listings/search" class="d-flex" role="search">
+          <input name="q" class="form-control me-2 search-inp" type="search" placeholder="Search destinations"/>
+          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+        </form>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link homes" href="/listings/new">Add new Home</a>
+        <% if(!currUser) { %>
+          <a class="nav-link" aria-current="page" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } %>
+
+        <% if(currUser) { %>
+          <%
+            if(currUser.image.url == undefined || currUser.image.url == ""){
+              currUser.image.url = "https://www.sid.cam.ac.uk/themes/custom/sidney/assets/img/default-profile-gray.png";
+            } 
+          %>
+          <a class="nav-link" href="/listings/owner/<%= currUser._id %>/profile"><img class="img-msg" src="<%= currUser.image.url %>" alt=""><b><%= currUser.username %></b></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

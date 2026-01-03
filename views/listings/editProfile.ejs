@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        img{
+            height: 70%;
+            width: 50%;
+            margin-top: 3rem;
+        }
+
+        input{
+            width: 450px;
+            background-color: white;
+            height: 39px;
+        }
+        .upload-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 50%;
+            border: 2px dashed hsl(0, 0%, 100%);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .upload-box:hover {
+            background-color: #000079;
+            border: 2px solid hsl(0, 0%, 100%);
+        }
+        #btn{
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 50%;
+            border: 2px dashed hsl(0, 0%, 100%);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #ffffff;
+            margin-top: 1rem;
+            background-color: rgb(0, 0, 0);
+            transition: all 0.3s ease;
+        }
+        #btn:hover {
+            background-color: #000079;
+            border: 2px solid hsl(0, 0%, 100%);
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="/listings/owner/<%= ownerInfo._id %>?_method=PUT" enctype="multipart/form-data">
+        <img id="preview" src="<%= image.url %>" alt=""><br>
+        <label for="fileInput" class="upload-box">
+            <span>📷 Upload Photo</span>
+        </label>
+        <input 
+            id="fileInput"
+            type="file" 
+            name="user[image]"
+            class="form-control"
+            hidden
+        />
+        <button id="btn" type="submit">Save</button>
+    </form>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+
+        fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        };
+        let data = reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .emptyImg{
+        height: 300px;
+        width: 300px;
+        border-radius: 50%;
+        border: 2px solid grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        justify-items: center;
+        align-content: center;
+    }
+    .proInfo{
+        height: 300px;
+        width: 300px;
+        border-radius: 50%;
+    }
+
+    .userPro{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 2px solid blueviolet;
+    }
+</style>
+
+<div>
+
+<div class="col-8 mt-3 mb-3 ms-3">
+    <h3><%= ownerInfo.name %></h3>
+</div>
+
+<div class="row d-flex justify-content-center align-items-center ms-auto">
+    <div class="col flex-shrink-0">
+        <div class="imgSpace">
+        <img 
+            src="<%= ownerInfo.image.url %>"
+            class="proInfo" 
+            alt="profile-image"
+        />
+        </div>
+    </div>
+
+    <div class="col flex-grow-1 ms-3">
+        <h4><span class="text-info">Username</span> : <%= ownerInfo.username %></h3>
+        <h4><span class="text-info">Email</span> : <%= ownerInfo.email %></h4>
+        <br><br>
+
+        <% if(currUser && currUser._id.equals(ownerInfo._id)) { %>
+            <a href="/logout"><button class="btn btn-success">Log out</button></a>
+            <a href="/listings/owner/<%= ownerInfo._id %>/profile/edit"><button class="btn btn-outline-secondary ms-3">Edit Profile Photo..</button></a>
+        <% } %>
+    </div>
+</div>
+</div>
+<hr>
+
+<h5>All Posts</h5>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 scroll-container d-flex mx-auto justify-content-center">
+        <% for(let listing of allListings) { %>
+            <% if(listing.owner.toString() == ownerInfo._id.toString()) { %>
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                    <div class="card col listing-card" style="width: 18rem;">
+                        <img src="<%=listing.image.url%>" class="card-img-top" alt="listing-image" style="height: 20rem;">
+                        <div class="card-img-overlay"><b>Ayush</b></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b><%= listing.title %></b> <br>
+                                
+                                <span>&#8377; <%= listing.price.toLocaleString("en-IN") %> / month</span>
+                                <i class="tax-info">&nbsp; &nbsp; +18% GST required</i>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            <% } %>
+        <% } %>
+</div>
+<div class="lsBox"></div>
+
+        
