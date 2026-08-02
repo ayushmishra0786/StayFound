@@ -84,7 +84,7 @@ main()
 });
 
 app.get("/", (req, res) => {
-    res.send("root path");
+    res.redirect("/listings");
 });
 
 app.use("/listings/:id/reviews", reviewRouter);
